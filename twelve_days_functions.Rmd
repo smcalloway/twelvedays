@@ -168,7 +168,8 @@ map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
 
 ## Step Five: Show Me Your Work! 
 
-GitHub repository link: 
+GitHub repository link: https://github.com/smcalloway/twelvedays
+
 
 <br><br><br><br>
 
