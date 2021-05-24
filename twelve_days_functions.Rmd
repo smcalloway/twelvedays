@@ -114,8 +114,7 @@ xmas <- xmas %>%
 
 sing_line <- function(dataset, line, phrase_col){
   
-  # Step 1: Setup the intro line
-  
+
   num_word <- as.character(ordinal(line))
   
   intro <- glue::glue("On the {num_word} day of Christmas, my true love sent to me,")
@@ -126,7 +125,12 @@ sing_line <- function(dataset, line, phrase_col){
   phrase <- phrases[line:1] %>% 
     str_c(collapse = "\n")
   
-  ## put it together
+    if (line == 1){
+    phrase <- str_trim(str_replace(phrase, "one"," "))
+  } else{
+    phrase <- str_replace(phrase, "one", "and")
+  }
+
   
   return(glue::glue("{intro} \n{phrase}"))
 }

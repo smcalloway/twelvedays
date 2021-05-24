@@ -232,22 +232,26 @@ code span.ot { color: #007020; }
 <h2>Step Three: Iteration.</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sing_line &lt;-<span class="st"> </span><span class="cf">function</span>(dataset, line, phrase_col){</span>
 <span id="cb6-2"><a href="#cb6-2"></a>  </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="co"># Step 1: Setup the intro line</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  </span>
-<span id="cb6-5"><a href="#cb6-5"></a>  num_word &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">ordinal</span>(line))</span>
-<span id="cb6-6"><a href="#cb6-6"></a>  </span>
-<span id="cb6-7"><a href="#cb6-7"></a>  intro &lt;-<span class="st"> </span>glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;On the {num_word} day of Christmas, my true love sent to me,&quot;</span>)</span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a>  phrases &lt;-<span class="st"> </span>dataset <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="st">      </span><span class="kw">pull</span>({{phrase_col}})</span>
-<span id="cb6-11"><a href="#cb6-11"></a></span>
-<span id="cb6-12"><a href="#cb6-12"></a>  phrase &lt;-<span class="st"> </span>phrases[line<span class="op">:</span><span class="dv">1</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="st">    </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb6-14"><a href="#cb6-14"></a>  </span>
-<span id="cb6-15"><a href="#cb6-15"></a>  <span class="co">## put it together</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a>  </span>
-<span id="cb6-17"><a href="#cb6-17"></a>  <span class="kw">return</span>(glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;{intro} </span><span class="ch">\n</span><span class="st">{phrase}&quot;</span>))</span>
-<span id="cb6-18"><a href="#cb6-18"></a>}</span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  num_word &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">ordinal</span>(line))</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  </span>
+<span id="cb6-6"><a href="#cb6-6"></a>  intro &lt;-<span class="st"> </span>glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;On the {num_word} day of Christmas, my true love sent to me,&quot;</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  phrases &lt;-<span class="st"> </span>dataset <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="st">      </span><span class="kw">pull</span>({{phrase_col}})</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  phrase &lt;-<span class="st"> </span>phrases[line<span class="op">:</span><span class="dv">1</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="st">    </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb6-13"><a href="#cb6-13"></a>  </span>
+<span id="cb6-14"><a href="#cb6-14"></a>    <span class="cf">if</span> (line <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb6-15"><a href="#cb6-15"></a>    phrase &lt;-<span class="st"> </span><span class="kw">str_trim</span>(<span class="kw">str_replace</span>(phrase, <span class="st">&quot;one&quot;</span>,<span class="st">&quot; &quot;</span>))</span>
+<span id="cb6-16"><a href="#cb6-16"></a>  } <span class="cf">else</span>{</span>
+<span id="cb6-17"><a href="#cb6-17"></a>    phrase &lt;-<span class="st"> </span><span class="kw">str_replace</span>(phrase, <span class="st">&quot;one&quot;</span>, <span class="st">&quot;and&quot;</span>)</span>
+<span id="cb6-18"><a href="#cb6-18"></a>  }</span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a>  </span>
+<span id="cb6-21"><a href="#cb6-21"></a>  <span class="kw">return</span>(glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;{intro} </span><span class="ch">\n</span><span class="st">{phrase}&quot;</span>))</span>
+<span id="cb6-22"><a href="#cb6-22"></a>}</span></code></pre></div>
 <div id="test-sing_line" class="section level3">
 <h3>Test sing_line()</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">sing_line</span>(xmas, </span>
@@ -255,7 +259,7 @@ code span.ot { color: #007020; }
 <span id="cb7-3"><a href="#cb7-3"></a>          <span class="dt">phrase_col =</span> Full.Phrase)</span></code></pre></div>
 <pre><code>## On the second day of Christmas, my true love sent to me, 
 ## two turtle doves
-## one a partridge in a pear tree</code></pre>
+## and a partridge in a pear tree</code></pre>
 <hr />
 </div>
 </div>
@@ -277,32 +281,32 @@ code span.ot { color: #007020; }
 <span id="cb9-14"><a href="#cb9-14"></a><span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span></span>
 <span id="cb9-15"><a href="#cb9-15"></a><span class="st">  </span><span class="kw">cat</span>()</span></code></pre></div>
 <pre><code>## On the first day of Christmas, my true love sent to me, 
-## one a partridge in a pear tree
+## a partridge in a pear tree
 ## On the second day of Christmas, my true love sent to me, 
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the third day of Christmas, my true love sent to me, 
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the fourth day of Christmas, my true love sent to me, 
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the fifth day of Christmas, my true love sent to me, 
 ## five golden rings
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the sixth day of Christmas, my true love sent to me, 
 ## six geese a-laying
 ## five golden rings
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the seventh day of Christmas, my true love sent to me, 
 ## seven swans a-swimming
 ## six geese a-laying
@@ -310,7 +314,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the eighth day of Christmas, my true love sent to me, 
 ## eight maids a-milking
 ## seven swans a-swimming
@@ -319,7 +323,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the ninth day of Christmas, my true love sent to me, 
 ## nine ladies dancing
 ## eight maids a-milking
@@ -329,7 +333,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the tenth day of Christmas, my true love sent to me, 
 ## ten lords a-leaping
 ## nine ladies dancing
@@ -340,7 +344,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the eleventh day of Christmas, my true love sent to me, 
 ## eleven pipers piping
 ## ten lords a-leaping
@@ -352,7 +356,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree
+## and a partridge in a pear tree
 ## On the twelfth day of Christmas, my true love sent to me, 
 ## twelve drummers drumming
 ## eleven pipers piping
@@ -365,7 +369,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves
-## one a partridge in a pear tree</code></pre>
+## and a partridge in a pear tree</code></pre>
 </div>
 <div id="step-five-show-me-your-work" class="section level2">
 <h2>Step Five: Show Me Your Work!</h2>
