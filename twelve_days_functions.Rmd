@@ -12,9 +12,9 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
 </style>
 <div class = "blue">
 
-Nice work!
+Nice work! You have no revisions!
   
-**Score** (out of 7 questions):
+**Score** (out of 7 questions): 3.714
 
 </div>
 
@@ -55,6 +55,16 @@ return(gift)
 
 }
 
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+  
+**3** -- What if the gift has a "y" not at the end? This function will replace the first "y" with an "ies". 
+
+</div>
+
 ```
 
 ### Test pluralize_gift() Function
@@ -64,6 +74,16 @@ return(gift)
 purrr::map_chr(xmas$Gift.Item, pluralize_gift)
 
 ```
+
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice work noticing that your function needs to be iterated! 
+
+</div>
 
 
 ---
@@ -98,6 +118,16 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
 }
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**3** -- This will print "one a partridge" rather than "a partridge" or "one partridge"! 
+
+</div>
+
+
 
 ### Test make_phrase() Function
 
@@ -114,6 +144,16 @@ xmas <- xmas %>%
   )
 
 ```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice check! 
+
+</div>
+
 
 
 ---
@@ -148,6 +188,17 @@ sing_line <- function(dataset, line, phrase_col){
 
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice `if()`, `else()` for deciding what should be printed for the first line. If you 
+would have used `if_else()` your function would be vectorized! 
+
+</div>
+
+
 ### Test sing_line()
 
 ```{r}
@@ -157,6 +208,16 @@ sing_line(xmas,
           phrase_col = Full.Phrase)
 
 ```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice check! 
+
+</div>
+
 
 ---
 
@@ -180,6 +241,15 @@ map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
   cat()
 
 ```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+**4** -- Nice work!
+
+</div>
 
 ## Step Five: Show Me Your Work! 
 
