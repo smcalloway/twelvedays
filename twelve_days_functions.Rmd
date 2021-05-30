@@ -7,6 +7,17 @@ output:
     css: styles.css
 ---
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
+</style>
+<div class = "blue">
+
+Nice work!
+  
+**Score** (out of 7 questions):
+
+</div>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
